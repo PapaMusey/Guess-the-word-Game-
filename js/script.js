@@ -80,18 +80,52 @@ const validateInput = function (input) {
 
 
 const makeGuess = function (guess) {
-    guess = guess.toUpperCase(); 
+    guess = guess.toUpperCase();
     if (guessedLetters.includes(guess)) {
         message.innerText = "You already guess that."
     } else {
         guessedLetters.push(guess);
         console.log(guessedLetters);
+        showGuessedLetters();
+        updateWordinProgress(guessedLetters);
     }
-
 
 }
 
 
+const showGuessedLetters = function () {
+    guessedLettersElement.innerHTML = "";
+    for (const letter of guessedLetters) {
+        const listItem = document.createElement("li");
+        listItem.innerText = letter;
+        guessedLettersElement.append(listItem);
+    }
 
+}
 
+const updateWordinProgress = function (guessedLetters) {
+    const wordUpper = word.toUpperCase();
+    const wordArray = wordUpper.split("");
+    //  console.log(wordArray);
+    const revealWord = [];
+    for (const letter of wordArray) {
+        if (guessedLetters.includes(letter)) {
+            revealWord.push(letter.toUpperCase());
+        } else {
+            revealWord.push("●");
+        }
+    }
+    wordInProgress.innerText = revealWord.join("");
+    // console.log(revealWord);
+    gameWin();
 
+};
+
+const gameWin = function () {
+    if (word.toUpperCase() === wordInProgress.innerText) {
+        message.classList.add("win");
+        message.innerText = "You guessed correct the word! Congrats!";
+    }
+};
+
+// updateWordinProgress(guessedLetters);
