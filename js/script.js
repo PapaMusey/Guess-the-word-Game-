@@ -150,8 +150,9 @@ const guessCount = function (guess) {
 
     if (remainingGuesses === 0) {
         message.innerHTML = `Game over! The word was <span class="highlight">${word}</span>.`;
-        remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
+        remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
         guessLetterButton.disabled = true;
+        startOver();
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
     } else {
@@ -164,17 +165,34 @@ const gameWin = function () {
     if (word.toUpperCase() === wordInProgress.innerText) {
         message.classList.add("win");
         message.innerText = "You guessed correct the word! Congrats!";
+        startOver();
     }
+
 };
 
 // updateWordinProgress(guessedLetters);
 
-/*
 const startOver = function (){
-    guessLetterButton.classList.remove(".guess")
-    remainingGuessesElement.classList.remove(".remaining")
-    guessedLettersElement.classList.remove(".guessed-letters");
-    playAgain.classList.add(".play-again");
+    guessLetterButton.classList.add("hide")
+    remainingGuessesElement.classList.add("hide")
+    guessedLettersElement.classList.add("hide");
+    playAgain.classList.remove("hide");
 
 }   
-    */
+
+playAgain.addEventListener("click", function() {
+    message.classList.remove("win");
+    guessedLetters = [];
+    remainingGuesses = 8;
+    remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    guessedLettersElement.innerHTML = "";
+    message.innerText = "";
+
+    // now showing the UI ELEMENTS 
+    guessLetterButton.classList.remove("hide");
+    remainingGuessesElement.classList.remove("hide");
+    guessedLettersElement.classList.remove("hide");
+    playAgain.classList.add("hide");
+    getWord();
+  });
+  
