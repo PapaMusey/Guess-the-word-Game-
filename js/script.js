@@ -1,3 +1,4 @@
+
 //The unordered list where the player’s guessed letters will appear.
 const guessedLettersElement = document.querySelector(".guessed-letters");
 //The Guess Button
@@ -182,7 +183,7 @@ const startOver = function (){
 
 playAgain.addEventListener("click", function() {
     message.classList.remove("win");
-    guessedLetters = [];
+    guessedLetters.length = 0;
     remainingGuesses = 8;
     remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
     guessedLettersElement.innerHTML = "";
@@ -190,9 +191,9 @@ playAgain.addEventListener("click", function() {
 
     // now showing the UI ELEMENTS 
     guessLetterButton.classList.remove("hide");
+    guessLetterButton.disabled = false; 
     remainingGuessesElement.classList.remove("hide");
     guessedLettersElement.classList.remove("hide");
     playAgain.classList.add("hide");
     getWord();
   });
-  
