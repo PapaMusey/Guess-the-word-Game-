@@ -1,4 +1,5 @@
 
+
 //The unordered list where the player’s guessed letters will appear.
 const guessedLettersElement = document.querySelector(".guessed-letters");
 //The Guess Button
